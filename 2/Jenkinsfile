@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
 	when {
-		expression { return changed }
+		expression { return env.changed }
 	}
             steps {
               echo "hellow World!"
