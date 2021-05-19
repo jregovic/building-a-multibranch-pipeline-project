@@ -2,8 +2,15 @@ pipeline {
     agent any
     environment {
         CI = 'true'
+        changed =  EXIT_STATUS = """${sh(
+                returnStatus: true,
+                script: 'git diff --name-only HEAD~1| cut -d "/" -f1 | uniq | grep 1'
+            )}"""
     }
     stages {
+	when {
+		changed
+	}
         stage('Build') {
             steps {
               echo "hellow World!"
