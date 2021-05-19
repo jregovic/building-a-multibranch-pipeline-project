@@ -2,16 +2,23 @@ pipeline {
     agent any
     environment {
         CI = 'true'
+        changed =  """${sh(
+                returnStatus: true,
+                script: 'git diff --name-only HEAD~1| cut -d "/" -f1 | uniq | grep 2'
+            )}"""
     }
     stages {
         stage('Build') {
+	when {
+		expression { return changed }
+	}
             steps {
-              echo "hellow World! 2"
+              echo "hellow World!"
             }
         }
         stage('Test') {
             steps {
-               echo 'test 2' 
+               echo 'test' 
             }
         }
     }
