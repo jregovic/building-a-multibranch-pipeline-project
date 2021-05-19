@@ -8,18 +8,15 @@ pipeline {
             )}"""
     }
     stages {
-        stage('Build') {
 	when {
-		changed
+		expression { return changed }
 	}
+        stage('Build') {
             steps {
               echo "hellow World!"
             }
         }
         stage('Test') {
-	when {
-		changed
-	}
             steps {
                echo 'test' 
             }
