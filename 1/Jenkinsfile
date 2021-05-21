@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+	VER = "1.11.2"
         CI = 'true'
         changed =  """${sh(
                 returnStatus: true,
@@ -13,7 +14,7 @@ pipeline {
 		expression { return env.changed }
 	}
             steps {
-              echo "hellow World!"
+             sh "./cmd.sh" 
             }
         }
         stage('Test') {
